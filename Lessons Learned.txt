@@ -1,0 +1,31 @@
+Milestone: The Archive is Live
+
+Technical Milestones
+
+Repository Lifecycle & Git Mastery
+
+Remote Synchronization: Setup public GitHub repository (C-John/IBM-Quantum-Entropy-Archive) using the VS Code Git.
+
+Environment Recovery: When the initial GitHub handshake hung, a reload window command forced VS Code to recognize the active session.
+
+Professional Footprint: Established a proper README.md using Markdown syntax to define the project's architecture and legal status for potential employers.
+
+Security 
+
+The Vault Pattern: Created a .env file to store future API keys and a .gitignore to ensure those secrets—along with binary "noise" like Zone.Identifier and target/ folders—never reach the public.
+
+IP Protection: Opted for an "All Rights Reserved" status instead of an MIT license to maintain ownership while still showcasing code.
+
+Build Systems (Maven)
+
+Dependency Injection: Authored a pom.xml to manage heavy-duty libraries like Apache Parquet and Hadoop, turning a standard Java setup into a data engineering workstation.
+
+XML Troubleshooting: Resolved a Non-parseable POM error caused by an illegal # character at the start of the XML file, a common snag when switching between script styles and markup.
+
+The Build Lifecycle: Executed mvn clean install to verify that the development container could download and link these external ingredients.
+
+Architecture & Initial Logic
+
+Directory Standards: Implemented the Standard Maven Directory Layout (src/main/java/com/calder/archive/).
+
+Executed ArchiveEngine.java: proving the code environment can successfully initialize a Hadoop Configuration object for the Extract phase.
