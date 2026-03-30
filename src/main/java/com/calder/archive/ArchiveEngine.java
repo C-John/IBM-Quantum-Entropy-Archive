@@ -23,11 +23,12 @@ public class ArchiveEngine {
 
     private static final String IBM_AUTH_URL = "https://iam.cloud.ibm.com/identity/token";
 
-    private static void pullQuantumData(HttpClient client, String token) {
+    private static void pullQuantumData(HttpClient client, String token, String serviceCRN) {
+        
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://quantum.cloud.ibm.com/api/v1/backends"))
             .header("Authorization", "Bearer " + token)
-            .header("Service-CRN", "YOUR_CRN_HERE")
+            .header("Service-CRN", serviceCRN)
             .header("IBM-API-Version", "2026-02-15")
             .header("accept", "application/json")
             .GET()
@@ -47,6 +48,7 @@ public class ArchiveEngine {
         
         Properties prop = new Properties();
         String apiKey = null;
+        String serviceCRN = null;
 
         System.out.println("============================================");
         System.out.println("Initializing IBM Quantum Entropy Archive...");
@@ -58,16 +60,21 @@ public class ArchiveEngine {
             System.out.println("\nReady to process high-entropy data.");
         }
         
-        // This "opens" the file and "loads" the keys into memory
         try (FileInputStream envFile = new FileInputStream(".env")) {
             prop.load(envFile);
             
-            // This grabs your specific key
             apiKey = prop.getProperty("IBM_CLOUD_API_KEY");
             
             if (apiKey != null) {
                 System.out.println("Success: API Key loaded from .env without external libraries.");
             }
+
+            serviceCRN = prop.getProperty("IBM_SERVICE_CRN");
+            
+            if (serviceCRN != null) {
+                System.out.println("Success: Service-CRN loaded from .env without external libraries.");
+            }
+
         } catch (IOException e) {
             System.err.println("Error: Could not find or read the .env file.");
         }
@@ -91,11 +98,13 @@ public class ArchiveEngine {
         try {
             if (Files.exists(cacheFile) && (System.currentTimeMillis() - Files.getLastModifiedTime(cacheFile).toMillis()) < 3300000) {
                 System.out.println("Loaded token from cache.");
-                pullQuantumData(client, Files.readString(cacheFile));
+                pullQuantumData(client, Files.readString(cacheFile), serviceCRN);
                 return; 
             }
         } catch (Exception e) {}
 
+        final String currentCRN = serviceCRN;
+        
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
             .thenApply(response -> {
                 try {
@@ -107,7 +116,7 @@ public class ArchiveEngine {
                     try {
                         Files.writeString(cacheFile, newToken); 
                         System.out.println("New token acquired and cached.");
-                        pullQuantumData(client, newToken);
+                        pullQuantumData(client, newToken, currentCRN);
                     } catch (Exception e) {}
                 }
             }).join();
