@@ -121,3 +121,6 @@ Data Partitioning: Engineered the local data lake structure by organizing folder
 Initial Transformation: Initiated the Java Cleaning Engine to flatten and extract specific metrics. Successfully parsed the nested JSON tree to extract median two-qubit error rates.
 
 Defensive Programming: Integrated robust validation to prevent null pointer exceptions when processing IBM API responses.
+
+Timestamp: 2026-04-01 | 10:45 CSTArchitectural Decoupling: Initiated the separation of Step 1 (Extract) and Step 2 (Transform) by creating a dedicated CleaningEngine.java.Separation of Concerns: Opted to isolate network-heavy I/O logic in ArchiveEngine from the data serialization and flattening logic, following strict Object-Oriented design principles.Schema Definition: Defined the QubitMetric internal class to serve as the blueprint for flattening complex hardware JSON into a columnar format suitable for Apache Parquet.Environment Validation: Confirmed that existing Maven dependencies for Hadoop and Parquet are sufficient for the upcoming transformation phase, requiring no further pom.xml modifications.
+

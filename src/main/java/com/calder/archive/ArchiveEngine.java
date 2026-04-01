@@ -1,3 +1,9 @@
+
+/**
+ * IBM Quantum Entropy Archive - Cleaning Engine
+ * Copyright (c) 2026 Calder Henry. All rights reserved.
+ */
+
 package com.calder.archive;
 
 import com.fasterxml.jackson.databind.JsonNode;
