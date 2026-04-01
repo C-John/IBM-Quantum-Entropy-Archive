@@ -9,6 +9,7 @@ target/
 # Data Lake (Keep large data out of GitHub
 quantum_data/
 data_lake/
+*.cache
 *.parquet
 *.csv
 

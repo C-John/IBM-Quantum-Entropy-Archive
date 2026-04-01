@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CleaningEngine {
 
-    // This is the "Blueprint" for one row of your Parquet file
+    // This is the "Blueprint" for one row of the Parquet file
     public static class QubitMetric {
         String timestamp;
         String machineName;

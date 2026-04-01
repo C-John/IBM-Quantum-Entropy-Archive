@@ -122,5 +122,27 @@ Initial Transformation: Initiated the Java Cleaning Engine to flatten and extrac
 
 Defensive Programming: Integrated robust validation to prevent null pointer exceptions when processing IBM API responses.
 
-Timestamp: 2026-04-01 | 10:45 CSTArchitectural Decoupling: Initiated the separation of Step 1 (Extract) and Step 2 (Transform) by creating a dedicated CleaningEngine.java.Separation of Concerns: Opted to isolate network-heavy I/O logic in ArchiveEngine from the data serialization and flattening logic, following strict Object-Oriented design principles.Schema Definition: Defined the QubitMetric internal class to serve as the blueprint for flattening complex hardware JSON into a columnar format suitable for Apache Parquet.Environment Validation: Confirmed that existing Maven dependencies for Hadoop and Parquet are sufficient for the upcoming transformation phase, requiring no further pom.xml modifications.
+Timestamp: 2026-04-01 | 10:45 
+CSTArchitectural Decoupling: Initiated the separation of Step 1 (Extract) and Step 2 (Transform) by creating a dedicated CleaningEngine.java.
+Separation of Concerns: Opted to isolate network-heavy I/O logic in ArchiveEngine from the data serialization and flattening logic, following strict Object-Oriented design principles.
+Schema Definition: Defined the QubitMetric internal class to serve as the blueprint for flattening complex hardware JSON into a columnar format suitable for Apache Parquet.
+Environment Validation: Confirmed that existing Maven dependencies for Hadoop and Parquet are sufficient for the upcoming transformation phase, requiring no further pom.xml modifications.
 
+Configuration Hardening: Transitioned IBM-API-Version from a hardcoded constant to an environment-controlled variable.
+Dynamic TTL: Identified the path to replace static cache timers with live expires_in metadata from the IAM handshake.
+
+Encapsulation Hardening: Transitioned from method-local parameter passing to class-level member variables to reduce stack overhead and improve readability.
+
+Namespace Consolidation: Centralized API metadata (Version, CRN, and Auth endpoints) into private static fields, mimicking C++ header-style configuration management.
+
+Timestamp: 2026-04-01 | 11:50 CST
+
+Dynamic TTL & Two-File Vault: Successfully transitioned from hardcoded cache timers to a dynamic "Expiration Deadline" logic. Implemented a partner-file system (token.cache and token_expiry.cache) to ensure the Archive Engine remains synchronized with IBM’s security protocols without redundant API calls.
+
+State Persistence: Integrated an updateLastRun() method to persist the pipeline’s execution history directly into the .env file, establishing a local audit trail for the automated workflow.
+
+Encapsulation Refinement: Completed the refactoring of method-local variables into private static class-level members (e.g., client, serviceCRN, apiVersion) to minimize stack overhead and simplify the Standard Maven Directory Layout architecture.
+
+Unit Normalization: Refactored "magic numbers" into named constants like BUFFER_SECONDS and MS_PER_SECOND, ensuring the dynamic TTL math is readable and aligned with standard data engineering practices.
+
+Code Cleanup: Identified and removed redundant fields, such as tokenExpiryTime, after verifying the Two-File System successfully handles absolute time persistence between project runs.
