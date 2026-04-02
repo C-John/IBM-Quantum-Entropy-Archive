@@ -1,0 +1,101 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="1YGNJvKDBHEkqMi84DOp">
+    <mxGraphModel dx="1095" dy="564" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-1" parent="1" style="rounded=1;arcSize=20;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Start: look in today&#39;s folder" vertex="1">
+          <mxGeometry height="54" width="226" x="208" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-2" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Loop: Each JSON file in the Folder" vertex="1">
+          <mxGeometry height="78" width="260" x="191" y="124" as="geometry" />
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-3" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Extract Machine information" vertex="1">
+          <mxGeometry height="78" width="260" x="108" y="252" as="geometry" />
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-4" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Inner Loop: Each Qubit in the file array" vertex="1">
+          <mxGeometry height="78" width="260" x="108" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-5" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Map JSON to QubitMetric Object" vertex="1">
+          <mxGeometry height="78" width="260" x="20" y="532" as="geometry" />
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-6" parent="1" style="rhombus;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="More Qubits?" vertex="1">
+          <mxGeometry height="145" width="145" x="165" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-7" parent="1" style="rhombus;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="More Files?" vertex="1">
+          <mxGeometry height="132" width="132" x="254" y="879" as="geometry" />
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-8" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Write daily_snapshot.parquet" vertex="1">
+          <mxGeometry height="78" width="260" x="191" y="1086" as="geometry" />
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-9" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="End" vertex="1">
+          <mxGeometry height="54" width="86" x="278" y="1214" as="geometry" />
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-10" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-1" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-2" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-11" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-2" style="curved=1;startArrow=none;endArrow=block;exitX=0.31;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="238" y="227" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-12" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-3" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-4" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-13" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-4" style="curved=1;startArrow=none;endArrow=block;exitX=0.33;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-5" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="495" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-14" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-5" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.05;entryY=0;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-6" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="635" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-15" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-6" style="curved=1;startArrow=none;endArrow=block;exitX=0.96;exitY=0;entryX=0.67;entryY=1;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-4" value="Yes">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="326" y="635" />
+              <mxPoint x="326" y="495" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-16" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-6" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.1;entryY=0;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-7" value="No">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="238" y="842" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-17" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-7" style="curved=1;startArrow=none;endArrow=block;exitX=1.01;exitY=0.01;entryX=0.74;entryY=1;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-2" value="Yes">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="424" y="842" />
+              <mxPoint x="424" y="227" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-18" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-7" style="curved=1;startArrow=none;endArrow=block;exitX=0.51;exitY=1.01;entryX=0.5;entryY=0;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-8" value="No">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVPJO0DoA5Ke3-ppARgU-19" edge="1" parent="1" source="sVPJO0DoA5Ke3-ppARgU-8" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="sVPJO0DoA5Ke3-ppARgU-9" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,26 @@
+/**
+ * IBM Quantum Entropy Archive - Cleaning Engine
+ * Copyright (c) 2026 Calder Henry. All rights reserved.
+ */
+
+graph TD
+    Start(Start: look in today's folder) --> FileLoop[Loop: Each JSON file in the Folder]
+    FileLoop --> Metadata[Extract Machine information]
+    Metadata --> QubitLoop[Inner Loop: Each Qubit in the file array]
+    QubitLoop --> Mapping[Map JSON to QubitMetric Object]
+    Mapping --> MoreQ{More Qubits?}
+    MoreQ -- Yes --> QubitLoop
+    MoreQ -- No --> MoreF{More Files?}
+    MoreF -- Yes --> FileLoop
+    MoreF -- No --> Parquet[Write daily_snapshot.parquet]
+    Parquet --> End
+
+    classDef mainLoop fill:#2d3436,stroke:#0984e3,stroke-width:2px,color:#dfe6e9
+    classDef subLoop fill:#2d3436,stroke:#00cec9,stroke-width:2px,color:#dfe6e9
+    classDef startEnd fill:#2d3436,stroke:#6c5ce7,stroke-width:2px,color:#dfe6e9
+    classDef action fill:#2d3436,stroke:#b2bec3,color:#dfe6e9
+
+    class FileLoop mainLoop
+    class QubitLoop subLoop
+    class Start,End startEnd
+    class Meta,Mapping,Parquet action

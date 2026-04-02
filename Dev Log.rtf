@@ -146,3 +146,35 @@ Encapsulation Refinement: Completed the refactoring of method-local variables in
 Unit Normalization: Refactored "magic numbers" into named constants like BUFFER_SECONDS and MS_PER_SECOND, ensuring the dynamic TTL math is readable and aligned with standard data engineering practices.
 
 Code Cleanup: Identified and removed redundant fields, such as tokenExpiryTime, after verifying the Two-File System successfully handles absolute time persistence between project runs.
+
+Timestamp: 2026-04-02 | 11:15 CST
+
+Milestone: Architectural Visualization & Logic Mapping
+
+Diagram as Code (Mermaid) Mastery
+
+Syntax Implementation: Successfully learned and implemented Mermaid.js syntax to define the project's data flow using a "Diagram as Code" approach.
+
+Logic Mapping: Authored a flowchart for the CleaningEngine using graph TD to visualize the transformation from raw JSON to structured Parquet.
+
+Visual Refinement: Implemented custom classDef styling to color-code logic loops, improving the readability of complex architectural documentation.
+
+The Double-Loop Transformation Logic
+
+Outer Loop (File Iteration): Defined the logic to traverse the daily data lake folders and ingest individual backend machine files (e.g., ibm_kingston.json).
+
+Inner Loop (Qubit Flattening): Mapped the "one-to-many" relationship between a machine and its hardware components, necessitating an inner loop to extract metrics for every individual qubit into the QubitMetric blueprint.
+
+Data Consolidation: Validated the "Batch Load" strategy, choosing to aggregate all machine data into a single daily_snapshot.parquet file for optimized Power BI performance.
+
+Documentation Sovereignty & Environment Hardening
+
+Zero-Extension Policy: Opted to store Mermaid diagrams as raw text strings rather than installing third-party VS Code extensions, maintaining a "Zero-Dependency" environment.
+
+Library Sovereignty: Aligned documentation practices with the project's security posture by rejecting non-essential software, ensuring the environment remains reproducible and hardened.
+
+Code Resilience & Schema Adaptation
+
+Polymorphic JSON Handling: Refactored the ArchiveEngine device loop to handle inconsistent IBM API responses (Strings vs. Objects) using ternary logic and JsonNode type checking.
+
+GitHub Synchronization: Successfully pushed logic fixes to the remote repository, finalizing the Extract phase and officially initiating the Transform phase.

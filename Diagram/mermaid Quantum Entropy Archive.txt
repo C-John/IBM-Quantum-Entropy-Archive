@@ -1,0 +1,14 @@
+/**
+ * IBM Quantum Entropy Archive - Cleaning Engine
+ * Copyright (c) 2026 Calder Henry. All rights reserved.
+ */
+
+
+graph TD
+    A[IBM Quantum API] -- Step 1: JSON Calibration Report --> B[Java Cleaning Engine]
+    subgraph "Step 2: Transform (Flattening)"
+    B --> B1[Extract T1/T2 Health]
+    B --> B2[Extract Readout/Gate Error]
+    end
+    B1 & B2 --> C[(Local Data Lake: Parquet Files)]
+    C -- Step 4: Visualize --> D[Power BI: Hardware Heatmap]
