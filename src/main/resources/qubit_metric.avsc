@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "QubitMetric",
+  "namespace": "com.calder.archive",
+  "fields": [
+    {"name": "timestamp", "type": "string"},
+    {"name": "machineName", "type": "string"},
+    {"name": "qubitId", "type": "int"},
+    {"name": "t1", "type": "double"},
+    {"name": "t2", "type": "double"},
+    {"name": "readoutError", "type": "double"},
+    {"name": "gateError", "type": "double"}
+  ]
+}
