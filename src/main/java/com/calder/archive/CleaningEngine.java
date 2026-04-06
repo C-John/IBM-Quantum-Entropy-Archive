@@ -50,6 +50,8 @@ public class CleaningEngine {
         } catch (Exception e) {
             System.err.println("Error processing folder: " + e.getMessage());
         }
+
+        System.exit(0);
     }
 
     public void processDailyFolder(Path dateFolder) throws IOException {
