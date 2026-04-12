@@ -74,7 +74,6 @@ public class ArchiveEngine {
         }
 
         updateLastRun();
-        System.exit(0);
     }
 
     private static String fetchAndCacheToken() {
