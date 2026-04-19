@@ -212,3 +212,14 @@ Cryptographic Security: Diagnosed a continuous crash loop caused by a missing se
 Database Initialization: Diagnosed a 500 Internal Server Error resulting from an uninitialized metadata state. Executed internal application scripts (db upgrade, fab create-admin, init) via docker compose exec to construct the internal SQLite tables and establish administrative credentials without altering the read-only image.
 
 Architecture Status: The Apache Superset service is officially stable, running on port 8088 alongside the data engine. The UI is accessible and ready to mount the Parquet data lake.
+
+Engineering Journal: Milestone Update
+Timestamp: 2026-04-19 | 14:15 CST
+
+Milestone: Architectural Hardening & Driver Integration
+
+Image Customization: Authored a Dockerfile.superset to bake the duckdb-engine driver directly into the container blueprint, enabling native Parquet querying.
+
+State Persistence: Engineered a named Docker volume (superset_home) to anchor the internal SQLite database to the host machine, ensuring administrative accounts survive container restarts.
+
+Schema Validation: Debugged and resolved YAML indentation errors that prevented the global volume definition from being recognized by the Docker engine.

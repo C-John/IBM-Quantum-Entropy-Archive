@@ -9,12 +9,17 @@ services:
       - .env              
 
   bi-dashboard:
-    image: apache/superset
+    build:
+      context: .
+      dockerfile: Dockerfile.superset
     ports:
       - "8088:8088"
     volumes:
       - ./quantum_data:/app/data
+      - superset_home:/app/superset_home
     env_file:
     - .env
     depends_on:
       - data-engine
+volumes:  
+  superset_home:
