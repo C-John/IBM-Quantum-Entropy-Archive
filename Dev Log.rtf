@@ -232,3 +232,10 @@ Driver Resolution: Finalized Dockerfile.superset using the --target installation
 BI Connectivity: Established an in-memory DuckDB connection within Apache Superset, enabling direct SQL querying of local Parquet assets.
 
 Infrastructure State: Confirmed that named volumes and custom blueprints survive the full container lifecycle (down/up).
+
+Engineering Journal: Entry
+Timestamp: 2026-04-19 | 16:18 CST
+
+Idempotent ETL Architecture: Updated the Java Cleaning Engine to check for existing Parquet outputs before processing JSON folders, preventing redundant data lake wipes and establishing a true idempotent pipeline.
+
+BI Visualization: Successfully deployed a time-series dashboard in Apache Superset for T1 average metrics.

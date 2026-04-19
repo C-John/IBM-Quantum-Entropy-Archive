@@ -40,19 +40,46 @@ public class CleaningEngine {
     }
 
     public static void main(String[] args) {
-        // Points to the folder created by ArchiveEngine today
-        Path dailyDir = Paths.get("quantum_data", LocalDate.now().toString());
-        
+
+        Path baseDir = Paths.get("quantum_data");
         CleaningEngine engine = new CleaningEngine();
         
         try {
-            engine.processDailyFolder(dailyDir);
-        } catch (Exception e) {
-            System.err.println("Error processing folder: " + e.getMessage());
+            Files.list(baseDir)
+                .filter(Files::isDirectory)
+                .forEach(dir -> {
+                    try {
+                        Path parquetFile = dir.resolve("daily_snapshot.parquet");
+                        if (!Files.exists(parquetFile)) {
+                            engine.processDailyFolder(dir);
+                        } else {
+                            System.out.println("Skipping " + dir.getFileName() + " - already processed.");
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error processing " + dir + ": " + e.getMessage());
+                    }
+                });
+        } catch (IOException e) {
+            System.err.println("Could not list quantum_data: " + e.getMessage());
         }
 
         System.exit(0);
     }
+
+
+        // Points to the folder created by ArchiveEngine today
+        // Path dailyDir = Paths.get("quantum_data", LocalDate.now().toString());
+        
+    //     CleaningEngine engine = new CleaningEngine();
+        
+    //     try {
+    //         engine.processDailyFolder(dailyDir);
+    //     } catch (Exception e) {
+    //         System.err.println("Error processing folder: " + e.getMessage());
+    //     }
+
+    //     System.exit(0);
+    // }
 
     public void processDailyFolder(Path dateFolder) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -74,42 +101,33 @@ public class CleaningEngine {
                     // INNER LOOP: Step into the "qubits" array
                     JsonNode qubitsArray = machineRoot.get("qubits");
                     if (qubitsArray != null && qubitsArray.isArray()) {
-                        for (JsonNode qubitNode : qubitsArray) {
+                        
+                        // Use a standard for-loop so the index (i) becomes our Qubit ID
+                        for (int i = 0; i < qubitsArray.size(); i++) {
+                            
+                            // In IBM's schema, the node itself IS the array of properties
+                            JsonNode qubitProperties = qubitsArray.get(i); 
 
                             QubitMetric metric = new QubitMetric();
-
-                            // Use .path() instead of .get() to prevent null crashes
                             metric.timestamp = machineRoot.path("last_update_date").asText("Unknown");
                             metric.machineName = machineName;
+                            metric.qubitId = i;
 
-                            // If the "qubit" field is missing, it will default to -1 instead of crashing
-                            metric.qubitId = qubitNode.path("qubit").asInt(-1);
-                            
-                            // // 1. Capture the official hardware test timestamp from the root
-                            // metric.timestamp = machineRoot.get("last_update_date").asText();
-                            // metric.machineName = machineName;
-                            // metric.qubitId = qubitNode.get("qubit").asInt();
+                            // Iterate directly over the properties array
+                            if (qubitProperties != null && qubitProperties.isArray()) {
+                                for (JsonNode prop : qubitProperties) {
+                                    String name = prop.path("name").asText("");
+                                    double value = prop.path("value").asDouble(0.0);
 
-                            // 2. Navigate the nested "properties" array to find physics metrics
-                            JsonNode properties = qubitNode.get("properties");
-                            if (properties != null && properties.isArray()) {
-                                for (JsonNode prop : properties) {
-                                    String name = prop.get("name").asText();
-                                    double value = prop.get("value").asDouble();
-
-                                    // Mapping specific IBM metrics to your QubitMetric fields
+                                    // Map specific IBM metrics
                                     if (name.equals("T1")) metric.t1 = value;
                                     else if (name.equals("T2")) metric.t2 = value;
                                     else if (name.equals("readout_error")) metric.readoutError = value;
                                 }
                             }
-
-                            // 3. Optional: Extract a representative Gate Error (e.g., from the 'sx' gate)
-                            // This often requires searching the root 'gates' array, but for this 
-                            // pass, we will focus on the individual qubit health.
                             dailyMetrics.add(metric);
                         }
-                    }
+                    } 
                 } catch (IOException e) {
                     System.err.println("Failed to parse " + fileName);
                 }
