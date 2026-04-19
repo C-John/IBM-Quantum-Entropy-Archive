@@ -223,3 +223,12 @@ Image Customization: Authored a Dockerfile.superset to bake the duckdb-engine dr
 State Persistence: Engineered a named Docker volume (superset_home) to anchor the internal SQLite database to the host machine, ensuring administrative accounts survive container restarts.
 
 Schema Validation: Debugged and resolved YAML indentation errors that prevented the global volume definition from being recognized by the Docker engine.
+
+Engineering Journal: Entry
+Timestamp: 2026-04-19 | 14:40 CST
+
+Driver Resolution: Finalized Dockerfile.superset using the --target installation flag to bypass missing pip binaries in the internal virtual environment.
+
+BI Connectivity: Established an in-memory DuckDB connection within Apache Superset, enabling direct SQL querying of local Parquet assets.
+
+Infrastructure State: Confirmed that named volumes and custom blueprints survive the full container lifecycle (down/up).

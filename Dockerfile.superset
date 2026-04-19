@@ -1,4 +1,4 @@
 FROM apache/superset:latest
 USER root
-RUN pip install duckdb-engine
+RUN pip install --no-cache-dir --target /app/.venv/lib/python3.10/site-packages duckdb-engine duckdb
 USER superset
