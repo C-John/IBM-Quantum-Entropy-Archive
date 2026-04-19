@@ -1,0 +1,16 @@
+services:
+  data-engine:
+    build: .
+    volumes:
+      - ./quantum_data:/workspace/quantum_data
+    environment:
+      - IBM_API_KEY=${IBM_API_KEY}
+
+  bi-dashboard:
+    image: apache/superset
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./quantum_data:/app/data
+    depends_on:
+      - data-engine
