@@ -1,15 +1,40 @@
 {
 	"name": "Quantum Data Env",
-	"build": {
-		"dockerfile": "../Dockerfile"
-	},
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "data-engine",
+	"workspaceFolder": "/workspace",
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"ms-python.python",
-				"vscjava.vscode-java-pack"
+				"vscjava.vscode-java-pack",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	},
 	"remoteUser": "root"
 }
+
+
+
+
+
+// {
+// 	"name": "Quantum Data Env",
+// 	"build": {
+// 		"dockerComposeFile": "../docker-compose.yml",
+// 		"service": "data-engine",
+// 		"workspaceFolder": "/workspace"
+
+// 		// "dockerfile": "../Dockerfile"
+// 	},
+// 	"customizations": {
+// 		"vscode": {
+// 			"extensions": [
+// 				"ms-python.python",
+// 				"vscjava.vscode-java-pack"
+// 			]
+// 		}
+// 	},
+// 	"remoteUser": "root"
+// }

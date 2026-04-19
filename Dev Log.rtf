@@ -199,3 +199,16 @@ Polymorphic JSON Handling: Implemented defensive programming using .path() and .
 Batch Load Verification: Successfully archived 468 rows of authenticated quantum metrics into a consolidated daily_snapshot.parquet file.
 
 Pipeline Status: The Extract, Transform, and Load (ETL) pipeline is officially operational and ready for visualization.
+
+Engineering Journal: Milestone Update
+Timestamp: 2026-04-19 | 13:07 CST
+
+Milestone: Dual-Container BI Dashboard Deployment
+
+Infrastructure as Code Mastery: Automated the Dev Container workspace by mapping the ms-azuretools.vscode-docker extension directly into devcontainer.json, ensuring container management tools persist across rebuilds.
+
+Cryptographic Security: Diagnosed a continuous crash loop caused by a missing security handshake. Generated a secure SECRET_KEY via openssl rand -base64 and successfully routed it through the local .env vault into the docker-compose.yml.
+
+Database Initialization: Diagnosed a 500 Internal Server Error resulting from an uninitialized metadata state. Executed internal application scripts (db upgrade, fab create-admin, init) via docker compose exec to construct the internal SQLite tables and establish administrative credentials without altering the read-only image.
+
+Architecture Status: The Apache Superset service is officially stable, running on port 8088 alongside the data engine. The UI is accessible and ready to mount the Parquet data lake.
