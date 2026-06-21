@@ -69,9 +69,36 @@ public class ArchiveEngine {
 
         if (token == null) {
             token = fetchAndCacheToken();
-        } else {
-            processArchive(token); 
         }
+
+        if(token != null){
+            // 1. Define our date boundaries (April 1st, 2026 to today)
+            LocalDate start = LocalDate.of(2026, 4, 1);
+            LocalDate end = LocalDate.now();
+
+            // 2. Step through every single day one by one
+            for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
+                
+                // 3. Build the path for this specific day
+                Path dailyDir = Paths.get("quantum_data", date.toString());
+                
+                // 4. Check if we are missing the index file for this day
+                if (!Files.exists(dailyDir.resolve("backends_index.json"))) {
+                    System.out.println("Historical catch-up triggered for: " + date);
+                    
+                    // 5. Run the download logic for this specific folder
+                    processArchive(token, dailyDir);
+                } else {
+                    System.out.println("Snapshot for " + date + " already exists. Skipping.");
+                }
+            }
+        }
+
+        // if (token == null) {
+        //     token = fetchAndCacheToken();
+        // } else {
+        //     processArchive(token); 
+        // }
 
         updateLastRun();
     }
@@ -99,7 +126,8 @@ public class ArchiveEngine {
                     Files.writeString(cacheFile, token);
                     Files.writeString(expiryFile, String.valueOf(deadline));
                     
-                    processArchive(token); 
+                    processArchive(token, Paths.get("quantum_data", java.time.LocalDate.now().toString()));
+                    // processArchive(token); 
                     return token;
                 } catch (Exception e) { 
                     System.err.println("Auth Error: " + e.getMessage());
@@ -108,8 +136,8 @@ public class ArchiveEngine {
             }).join();
     }
 
-    private static void processArchive(String token) {
-        Path dailyDir = Paths.get("quantum_data", LocalDate.now().toString());
+    private static void processArchive(String token, Path dailyDir) {
+        // Path dailyDir = Paths.get("quantum_data", LocalDate.now().toString());
         
         HttpRequest listReq = HttpRequest.newBuilder()
             .uri(URI.create("https://quantum.cloud.ibm.com/api/v1/backends"))
