@@ -94,12 +94,6 @@ public class ArchiveEngine {
             }
         }
 
-        // if (token == null) {
-        //     token = fetchAndCacheToken();
-        // } else {
-        //     processArchive(token); 
-        // }
-
         updateLastRun();
     }
 
@@ -126,8 +120,7 @@ public class ArchiveEngine {
                     Files.writeString(cacheFile, token);
                     Files.writeString(expiryFile, String.valueOf(deadline));
                     
-                    processArchive(token, Paths.get("quantum_data", java.time.LocalDate.now().toString()));
-                    // processArchive(token); 
+                    // processArchive(token, Paths.get("quantum_data", java.time.LocalDate.now().toString()));
                     return token;
                 } catch (Exception e) { 
                     System.err.println("Auth Error: " + e.getMessage());
